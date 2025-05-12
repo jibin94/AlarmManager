@@ -2,7 +2,6 @@
 An Android application for scheduling, managing, and receiving alarms with a clean architecture approach.
 
 ## Project Structure
-
 alarmmanager/
 ├── alarm/
 │   ├── AlarmScheduler          # Interface for scheduling alarms
