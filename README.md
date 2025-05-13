@@ -2,33 +2,42 @@
 An Android application for scheduling, managing, and receiving alarms with a clean architecture approach.
 
 ## Project Structure
+```
 alarmmanager/
 ├── alarm/
-│   ├── AlarmScheduler          # Interface for scheduling alarms
-│   └── AlarmSchedulerImpl      # Implementation of the alarm scheduling logic
+│   ├── AlarmScheduler              # Interface for scheduling and managing alarms
+│   └── AlarmSchedulerImpl          # Implementation using Android's AlarmManager to set/cancel alarms
+│
 ├── data/
 │   ├── repository/
-│   │   ├── AlarmRepository     # Interface for alarm data operations
-│   │   └── AlarmRepositoryImpl # Implementation of alarm data repository
+│   │   ├── AlarmRepository         # Interface for alarm data operations (insert, delete, fetch)
+│   │   └── AlarmRepositoryImpl     # Implementation interacting with the local data source
+│   │
 │   └── sources/
-│       ├── local/
-│       │   ├── Alarm           # Local data model for alarms
-│       │   ├── AlarmDao        # Data Access Object for database operations
-│       │   └── AlarmDatabase   # Database configuration for alarms
+│       └── local/
+│           ├── Alarm              # Room Entity representing an alarm
+│           ├── AlarmDao           # DAO interface with methods for DB access
+│           └── AlarmDatabase      # Room database setup providing DAO instance
+│
 ├── di/
-│   └── DatabaseModule          # Dependency injection module for database
+│   └── DatabaseModule              # DI module to provide DB and DAO via Hilt
+│
 ├── receiver/
-│   └── AlarmReceiver           # Broadcast receiver for alarm events
+│   └── AlarmReceiver               # BroadcastReceiver triggered when alarm fires
+│
 ├── ui/
 │   └── main/
-│       ├── AlarmActivity           # Main activity for displaying alarms
-│       ├── AlarmActivityViewModel  # ViewModel for the main activity
-│       ├── AlarmItemAdapter        # Adapter for displaying alarm items in RecyclerView
-│       └── SwipeItemHelper         # Helper for swipe actions on alarm items
-└── utils/
-    ├── Constants               # App-wide constants
-    └── Event                   # Event wrapper class for LiveData
-└── AlarmApp                    # Application class
+│       ├── AlarmActivity               # Activity to display and manage alarms
+│       ├── AlarmActivityViewModel      # ViewModel holding LiveData and UI logic
+│       ├── AlarmItemAdapter            # Adapter to bind alarm data to RecyclerView
+│       └── SwipeItemHelper             # Enables swipe gestures on alarm list
+│
+├── utils/
+│   ├── Constants                   # Global constants
+│   └── Event                       # Wrapper for LiveData one-time events
+│
+└── AlarmApp                        # Application class for global setup (e.g., DI init)
+```
 
 ## Features
 * Schedule and manage alarms
